@@ -1845,3 +1845,10 @@ form label {
 .light-white-text {
   color: rgba(255, 255, 255, 0.7); /* Light white color */
 }
+@media (max-width: 600px) {
+  #fh5co-header {
+      background-size: cover !important;
+      background-position: center center !important;
+      background-repeat: no-repeat !important;
+  }
+}
