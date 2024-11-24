@@ -8,9 +8,10 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<title>Wedding Bell</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<meta name="description" content="Free HTML5 Template by FREEHTML5.CO" />
-	<meta name="keywords" content="free html5, free template, free bootstrap, html5, css3, mobile first, responsive" />
-	<meta name="author" content="FREEHTML5.CO" />
+	<meta name="description" content="At Wedding Bell, we transform your dream wedding into a reality with personalized planning, seamless execution, and exceptional service. From wedding dresses and decor to invitations, we simplify your journey and handle all your wedding purchasing needs. Let us make your special day unforgettable!" />
+	<meta name="keywords" content="Wedding planning, wedding decor, wedding dresses, wedding invitations, wedding procurement, dream wedding, personalized wedding planning, Wedding Bell" />
+	<meta name="author" content="Wedding Bell" />
+	
 
   <!-- 
 	//////////////////////////////////////////////////////
@@ -157,32 +158,50 @@
 							<input type="date" id="marriage-date" name="marriage-date" class="form-control">
 						  </div>
 						</div>
-					
+						<div class="col-md-12">
+							<label for="pincode">Pincode</label>
+							<input
+								type="text"
+								id="pincode"
+								name="pincode"
+								class="form-control"
+								placeholder="Your area pincode"
+								required
+								onblur="fetchDistrict()"
+							/>
+						</div>
 						<div class="row form-group">
 							<div class="col-md-12">
 							  <label for="place">Place</label>
 							  <input type="text" id="place" name="place" class="form-control" placeholder="Your place of residence" required>
 							</div>
 						  </div>
+						  <div class="row form-group">
+							<div class="col-md-6">
+								<label for="town">Nearest Town</label>
+								<input type="text" id="town" name="town" class="form-control" placeholder="Your nearest town" required>
+							</div>
+							
+						</div>
 						<div class="row form-group">
 						  <div class="col-md-12">
 							<label for="district">District</label>
 							<select id="district" name="district" class="form-control" required>
-							  <option value="">Select District</option>
-							  <option value="Alappuzha">Alappuzha</option>
-							  <option value="Ernakulam">Ernakulam</option>
-							  <option value="Idukki">Idukki</option>
-							  <option value="Kottayam">Kottayam</option>
-							  <option value="Kozhikode">Kozhikode</option>
-							  <option value="Malappuram">Malappuram</option>
-							  <option value="Palakkad">Palakkad</option>
-							  <option value="Pathanamthitta">Pathanamthitta</option>
-							  <option value="Thiruvananthapuram">Thiruvananthapuram</option>
-							  <option value="Thrissur">Thrissur</option>
-							  <option value="Wayanad">Wayanad</option>
-							  <option value="Kollam">Kollam</option>
-							  <option value="Kannur">Kannur</option>
-							  <option value="Kasargod">Kasargod</option>
+								<option value="">Select District</option>
+								<option value="Alappuzha">Alappuzha</option>
+								<option value="Ernakulam">Ernakulam</option>
+								<option value="Idukki">Idukki</option>
+								<option value="Kottayam">Kottayam</option>
+								<option value="Kozhikode">Kozhikode</option>
+								<option value="Malappuram">Malappuram</option>
+								<option value="Palakkad">Palakkad</option>
+								<option value="Pathanamthitta">Pathanamthitta</option>
+								<option value="Thiruvananthapuram">Thiruvananthapuram</option>
+								<option value="Thrissur">Thrissur</option>
+								<option value="Wayanad">Wayanad</option>
+								<option value="Kollam">Kollam</option>
+								<option value="Kannur">Kannur</option>
+								<option value="Kasargod">Kasargod</option>
 							</select>
 						  </div>
 						</div>
@@ -200,7 +219,7 @@
 						<ul>
 							<li class="address">Chakkarakkkal  <br> Kannur Kerala</li>
 							<li class="phone"><a href="tel://1234567920">+91 9544908325</a></li>
-							<li class="email"><a href="mailto:mb43210123@gmail.com">mb43210123@gmail.com</a></li>
+							<li class="email"><a href="weddingbell.official1@gmail.com">weddingbell.official1@gmail.com</a></li>
 						</ul>
 					</div>
 
@@ -301,7 +320,36 @@
 			  });
 		});
 	 </script>
-
+<script>
+	function fetchDistrict() {
+		const pincode = document.getElementById('pincode').value;
+		const districtField = document.getElementById('district');
+	
+		if (pincode.length !== 6 || isNaN(pincode)) {
+			alert('Please enter a valid 6-digit pincode.');
+			return;
+		}
+	
+		fetch(`https://api.postalpincode.in/pincode/${pincode}`)
+			.then(response => response.json())
+			.then(data => {
+				if (data[0].Status === 'Success' && data[0].PostOffice.length > 0) {
+					const district = data[0].PostOffice[0].District;
+					districtField.value = district; // Set district dropdown
+					// alert(`District found: ${district}`);
+				} else {
+					alert('No district found for the given pincode.');
+				}
+			})
+			.catch(error => {
+				// console.error('Error fetching district:', error);
+				// alert('Unable to fetch district. Please try again later.');
+			});
+	}
+	</script>
+	
 	</body>
 </html>
 
+nearest locality
+3 4
